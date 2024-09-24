@@ -57,7 +57,7 @@ To run the simulation, use the following commands:
 
 ### Videos
 <p align="center">
-  <video src="images/video.mp4" width="500px"></video>
+  <video src="Docs/images/video.mp4" width="500px"></video>
 </p>
 
 ---
