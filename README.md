@@ -10,6 +10,7 @@ The project includes the following packages:
 2. **irb2400_controller**:  Contains the configuration and launch files for the controller manager.
 3. **irb2400_moveit**:	    Integrates MoveIt for motion planning and move robot.
 
+
 ### Prerequisites
 
 - ROS 2 (Humble)
@@ -56,7 +57,7 @@ To run the simulation, use the following commands:
 
 ### Videos
 
-[![Simulation Video](Docs/video/irb2400.mp4)
+[![Simulation Video](Docs/images/irb2400.mp4)
 
 
 ---
