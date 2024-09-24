@@ -56,9 +56,7 @@ To run the simulation, use the following commands:
     ```
 
 ### Videos
-<p align="center">
-  <video src="Docs/images/irb2400.mp4" width="500px"></video>
-</p>
+![Simulation](Docs/images/irb2400.gif)
 
 ---
 
