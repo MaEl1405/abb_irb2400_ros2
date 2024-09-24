@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/humble/include/**",
+        "/home/z/ros2_workspaces/ABB_IRB2400_ws/src/irb2400_bringup/include/**",
+        "/home/z/ros2_workspaces/ABB_IRB2400_ws/src/irb2400_controller/include/**",
+        "/home/z/ros2_workspaces/ABB_IRB2400_ws/src/irb2400_description/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

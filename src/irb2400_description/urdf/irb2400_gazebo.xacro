@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="urdf_macro.xacro"/>
+
+
+    <!-- Set color for irb2400 in gazebo-->
+    <xacro:gazebo_material ref="base_link"/>
+    <xacro:gazebo_material ref="link1"/>
+    <xacro:gazebo_material ref="link2"/>
+    <xacro:gazebo_material ref="link3"/>
+    <xacro:gazebo_material ref="link4"/>
+    <xacro:gazebo_material ref="link5"/>
+    <xacro:gazebo_material ref="link6"/>
+
+    <!-- Enable the support and interface within gazebo and ros2_control-->
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <robot_param>robot_description</robot_param>
+          <robot_param_node>robot_state_publisher</robot_param_node>
+          <parameters>$(find irb2400_controller)/config/irb2400_controller.yaml</parameters>
+      </plugin>
+    </gazebo>
+
+
+</robot>

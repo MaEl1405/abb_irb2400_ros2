@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro" name="irb2400">
+
+    <!-- Include xacro files-->
+    <xacro:include filename="urdf_macro.xacro"/>
+    <xacro:include filename="irb2400_gazebo.xacro"/>
+    <xacro:include filename="irb2400_ros2_control.xacro"/>
+
+    <!-- Define Links-->
+    <link name="dummy_link"/>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://irb2400_description/meshes/irb2400/visual/base_link.stl"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://irb2400_description/meshes/irb2400/collision/base_link.stl"/>
+            </geometry>
+        </collision>
+        <xacro:link_inertial xyz="0 0 0"  rpy="0 0 0" M="351" 
+                             ixx="7.047"  ixy="0.043" ixz="0.189"
+                             iyy="12.887" iyz="0.0"     izz="18.6"/>
+    </link>
+
+
+    <link name="link1">
+        <visual>
+            <geometry>
+                <mesh filename="package://irb2400_description/meshes/irb2400/visual/link_1.stl"/>
+            </geometry>
+            <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://irb2400_description/meshes/irb2400/collision/link_1.stl"/>
+            </geometry>
+            <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+        </collision>
+        <xacro:link_inertial xyz="0 0 0" rpy="0 0 0" M="409" 
+                             ixx="21.234" ixy="0.850" ixz="0.0" 
+                             iyy="13.851" iyz="0.198" izz="16.282"/>
+    </link>
+
+
+    <xacro:links link_number="2" xyz="0 0 0" rpy="0 0 0" M="124" 
+                                 ixx="5.008" ixy="0.0"   ixz="0.183" 
+                                 iyy="4.918" iyz="0.0"   izz="0.665" /> <!--Link2-->
+
+    <xacro:links link_number="3" xyz="0 0 0" rpy="0 0 0"  M="113.0"     
+                                 ixx="0.893" ixy="0.0"    ixz="0.0" 
+                                 iyy="2.548" iyz="0.028"  izz="2.616" /> <!--Link3-->
+
+    <xacro:links link_number="4" xyz="0 0 0"  rpy="0 0 0"  M="49.0"
+                                 ixx="0.123"  ixy="0.0"    ixz="0.0" 
+                                 iyy="1.41"   iyz="0.0"    izz="1.443" /> <!--Link4-->
+
+    <xacro:links link_number="5" xyz="0 0 0" rpy="0 0 0" M="2.7" 
+                                 ixx="0.003"   ixy="0.0"   ixz="0.0" 
+                                 iyy="0.004"   iyz="0.0"   izz="0.002" /> <!--Link5-->
+     
+                                               
+    <xacro:links link_number="6" xyz="0 0 0"  rpy="0 0 0" M="0.8" 
+                                 ixx="0.00018"  ixy="0.0"   ixz="0.0" 
+                                 iyy="0.0013"  iyz="0.0"   izz="0.0013" /> <!--Link6-->
+    
+    <!-- Define joints-->
+    <joint name="dummy_joint" type="fixed">
+        <parent link="dummy_link"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="base_link1_joint" type="revolute">
+        <parent link="base_link"/>
+        <child  link="link1"/>
+        <origin xyz="0 0 0.15" rpy="0 0 0"/>
+        <limit lower="-${pi}" upper="${pi}" effort="100" velocity="100"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="link1_link2_joint" type="revolute">
+        <parent link="link1"/>
+        <child  link="link2"/>
+        <origin xyz="0.05 0 0.45" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="0" upper="${pi/2.0}" effort="100" velocity="100"/>
+    </joint>
+
+    <joint name="link2_link3_joint" type="revolute">
+        <parent link="link2"/>
+        <child  link="link3"/>
+        <origin xyz="0 0 0.7" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="0" upper="${pi/2.0}" effort="100" velocity="100"/>
+    </joint>
+
+    <joint name="link3_link4_joint" type="revolute">
+        <parent link="link3"/>
+        <child  link="link4"/>
+        <origin xyz="0.26 0 0.136" rpy="0 0 0"/>
+        <limit lower="-${pi}" upper="${pi}" effort="100" velocity="100"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <joint name="link4_link5_joint" type="revolute">
+        <parent link="link4"/>
+        <child  link="link5"/>
+        <origin xyz="0.5 0 0" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="-${pi/2.0}" upper="${pi/2.0}" effort="100" velocity="100"/>
+    </joint>
+
+    <joint name="link5_link6_joint" type="revolute">
+        <parent link="link5"/>
+        <child  link="link6"/>
+        <axis xyz="1 0 0"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <limit lower="-${2*pi}" upper="${2*pi}" effort="100" velocity="100"/>
+    </joint>
+
+    
+
+    <!-- Set transmission to each moveable joints of the robot-->
+    <xacro:joints_transmission joint_name="base_link1_joint"/>
+    <xacro:joints_transmission joint_name="link1_link2_joint"/>
+    <xacro:joints_transmission joint_name="link2_link3_joint"/>
+    <xacro:joints_transmission joint_name="link3_link4_joint"/>
+    <xacro:joints_transmission joint_name="link4_link5_joint"/>
+    <xacro:joints_transmission joint_name="link5_link6_joint"/>
+
+</robot>

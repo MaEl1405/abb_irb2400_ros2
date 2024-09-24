@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot name="irb2400">
+    <group name="arm">
+        <joint name="base_link1_joint"/>
+        <joint name="link1_link2_joint"/>
+        <joint name="link2_link3_joint"/>
+        <joint name="link3_link4_joint"/>
+        <joint name="link4_link5_joint"/>
+        <joint name="link5_link6_joint"/>
+    </group>
+
+    <group_state name="home" group="arm">
+        <joint name="base_link1_joint"  value="0"/>
+        <joint name="link1_link2_joint" value="0"/>
+        <joint name="link2_link3_joint" value="0"/>
+        <joint name="link3_link4_joint" value="0"/>
+        <joint name="link4_link5_joint" value="0"/>
+        <joint name="link5_link6_joint" value="0"/>
+    </group_state>
+
+    <virtual_joint name="FixedBase" type="fixed" parent_frame="dummy_link" child_link="base_link"/>
+
+    <disable_collisions link1="base_link" link2="link1" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="link2" reason="Never" />
+    <disable_collisions link1="base_link" link2="link3" reason="Never" />
+    <disable_collisions link1="link1" link2="link2" reason="Adjacent" />
+    <disable_collisions link1="link1" link2="link3" reason="Never" />
+    <disable_collisions link1="link2" link2="link3" reason="Adjacent" />
+    <disable_collisions link1="link2" link2="link4" reason="Never" />
+    <disable_collisions link1="link2" link2="link5" reason="Never" />
+    <disable_collisions link1="link2" link2="link6" reason="Never" />
+    <disable_collisions link1="link3" link2="link4" reason="Adjacent" />
+    <disable_collisions link1="link3" link2="link5" reason="Never" />
+    <disable_collisions link1="link3" link2="link6" reason="Never" />
+    <disable_collisions link1="link4" link2="link5" reason="Adjacent" />
+    <disable_collisions link1="link4" link2="link6" reason="Default" />
+    <disable_collisions link1="link5" link2="link6" reason="Adjacent" />
+
+</robot>

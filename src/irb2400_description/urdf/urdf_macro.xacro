@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+        <!-- this macro in order to assign a ransmission
+             to each of the movable joints of the robot -->
+        <xacro:macro name="joints_transmission" params="joint_name">
+            <transmission name="${joint_name}_transmission">
+                <plugin>transmission_interface/SimpleTransmission</plugin>
+                <actuator name="${joint_name}_motor" role="actuator1"/>
+                <joint name="${joint_name}" role="joint1">
+                    <mechanical_reduction>1.0</mechanical_reduction>
+                </joint>
+            </transmission>
+        </xacro:macro>
+
+        
+        <!-- Defined for Gazebo material-->
+        <xacro:macro name="gazebo_material" params="ref">
+            <gazebo reference="${ref}">
+                <material>Gazebo/Orange</material>
+            </gazebo>
+        </xacro:macro>
+    
+        <!-- Defined for lik2 through link6-->
+        <xacro:macro name="links" params="link_number xyz rpy M ixx ixy ixz iyy iyz izz">
+            <link name="link${link_number}">
+                <visual>
+                    <geometry>
+                         <mesh filename="package://irb2400_description/meshes/irb2400/visual/link_${link_number}.stl"/>
+                    </geometry>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://irb2400_description/meshes/irb2400/collision/link_${link_number}.stl"/>
+                    </geometry>
+                </collision>
+                <xacro:link_inertial    xyz="${xyz}" rpy="${rpy}" M="${M}" 
+                                        ixx="${ixx}" ixy="${ixy}" ixz="${ixz}"
+                                        iyy="${iyy}" iyz="${iyz}"
+                                        izz="${izz}"/>
+            </link>
+        </xacro:macro>
+
+        <!-- Defined for inertial-->
+        <xacro:macro name="link_inertial" params="xyz rpy M ixx ixy ixz iyy iyz izz">
+            <inertial>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+                <mass   value="${M}" />
+                <inertia ixx="${ixx}" ixy="${ixy}" ixz="${ixz}"
+                         iyy="${iyy}" iyz="${iyz}"
+                         izz="${izz}"/>
+            </inertial>
+        </xacro:macro>
+    
+
+</robot>

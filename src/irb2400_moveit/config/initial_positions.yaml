@@ -1,0 +1,7 @@
+initial_position:
+  base_link1_joint:  0.0
+  link1_link2_joint: 0.0
+  link2_link3_joint: 0.0
+  link3_link4_joint: 0.0
+  link4_link5_joint: 0.0
+  link5_link6_joint: 0.0

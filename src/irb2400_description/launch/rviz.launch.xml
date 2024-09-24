@@ -1,0 +1,19 @@
+<launch>
+    <!-- Argument for URDF model path -->
+    <arg name="model_path" default="$(find-pkg-share irb2400_description)/urdf/irb2400.urdf.xacro"/>
+
+    <!-- Declare robot_state_publisher-->
+    <node pkg="robot_state_publisher" exec="robot_state_publisher">
+        <param name="robot_description" value="$(command 'xacro $(var model_path)')"/>
+    </node>
+
+    <!-- Declare joint_state_publisher -->
+    <node pkg="joint_state_publisher" exec="joint_state_publisher"/>
+    
+    <!-- GUI for joint state publisher -->
+    <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"/>
+
+    <!-- Node to start RViz for visualization -->
+    <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share irb2400_description)/rviz/urdf_config.rviz" output="screen" />
+
+</launch>
